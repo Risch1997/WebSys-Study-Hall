@@ -1,5 +1,6 @@
 <?php
-	require("config.php");
+	require_once("config.php");
+	
 	//Include all function files
 	include("functions_user.php");
 	
@@ -21,7 +22,6 @@
 			if ($selectDB) {
 				try {
 					$dbConn->exec("USE `" . $dbConfig["name"] . "`;");
-					echo "Success!";
 				} catch (PDOEXCEPTION $e) {
 					return false;
 				}
