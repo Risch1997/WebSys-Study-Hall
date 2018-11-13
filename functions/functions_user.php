@@ -37,4 +37,44 @@
 			return false;
 		}
 	}
+	
+	function login($email, $password) {
+		global $dbConn;
+		
+		// Query DB to get the salt of associted with the specified email address
+		$query = $dbConn->query("SELECT `salt` FROM `Students` WHERE `email`='$email';");
+		
+		// Check to make sure something was returned by the query
+		if ($query->rowCount() != 1) {
+			return false;
+		} else {
+			$query = $query->fetchObject();
+			$salt = $query->salt;
+			
+			// Create the salted version of the password
+			$salted = hash("sha256", $salt . $password);
+			
+			// Check if there is an appropriate entry with the specified email and salted password
+			$query = $dbConn->query("SELECT * FROM `Students` WHERE `email`='$email' AND `password`='$salted';");
+			if ($query->rowCount() == 1) {
+				$user = $query->fetchObject();
+				
+				// Set session variables
+				$_SESSION['user_id'] = $user->user_id;
+				
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	function logout() {
+		// Unset session variables
+		unset($_SESSION['user_id']);
+		session_destroy();
+		
+		// Clear browser cookie
+		setcookie(session_name(), time() - 72000);
+	}
 ?>
