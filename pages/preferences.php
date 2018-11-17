@@ -28,7 +28,18 @@
 					<p>
 						<label for="month">Graduation</label>
 						<select id="month" name="month">
-						  <option value="volvo">Month</option>
+						  <option value="volvo">January</option>
+							<option value="volvo">February</option>
+							<option value="volvo">March</option>
+							<option value="volvo">April</option>
+							<option value="volvo">May</option>
+							<option value="volvo">June</option>
+							<option value="volvo">July</option>
+							<option value="volvo">August</option>
+							<option value="volvo">September</option>
+							<option value="volvo">October</option>
+							<option value="volvo">November</option>
+							<option value="volvo">December</option>
 						</select>
 						<select id="year" name="year">
 						  <option value="volvo">Year</option>
