@@ -30,25 +30,35 @@
 		}
 	}
 
+	//---EDITED: hzz, NOV 25, TESTING FUNCTIONALITY---
+	// Handle add a sc_relation
+	if (isset($_POST['add'])) {
+		$sid = $_SESSION['user_id'];
+		$cid = $_POST["course_id"];
+		$priority = $_POST["priority"];
+		if (addRelation($sid, $cid, $priority)){
+
+		}
+	}
+	//------------------------------------------------
+
+
 	if (isset($_SESSION['user_id'])) {
 		echo "Logged in. ID: " . $_SESSION['user_id'];
 
-		// EDITED: hzz, NOV 25, test populating relation data
-		echo "<form id=\"addrelation\" method=\"POST\">
+
+		//---EDITED: hzz, NOV 25, TESTING FUNCTIONALITY---
+		$matches = findMatchAll($_SESSION['user_id']);
+		echo "<h4>Matches</h4>";
+		foreach ($matches as $key => $value) {
+			echo "<p>student_id: ".$key. " Mpts: ".$value."</p>";
+		}
+		echo "<form id=\"add\" method=\"POST\">
 			<input type=\"cid\" name=\"course_id\" placeholder=\"Course Id\">
 			<input type=\"priority\" name=\"priority\" placeholder=\"Priority\">
-			<input type=\"submit\" name=\"addrelation\" value=\"Add Relation\">
+			<input type=\"submit\" name=\"add\" value=\"Add\">
 		</form>";
-		if (isset($_POST['addrelation'])) {
-			$sid = $_SESSION['user_id'];
-			$cid = $_POST["course_id"];
-			$priority = $_POST["priority"];
-
-			if (addRelation($sid, $cid, $priority)){
-				echo "SUCCESS!: " . $_SESSION['user_id'];
-			}
-
-		}
+		//------------------------------------------------
 
 		echo "<form id=\"logout\" method=\"POST\">
 			<input type=\"submit\" name=\"logout\" value=\"Log Out\">
