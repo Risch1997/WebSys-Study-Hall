@@ -37,6 +37,7 @@
 		echo "<form id=\"addrelation\" method=\"POST\">
 			<input type=\"cid\" name=\"course_id\" placeholder=\"Course Id\">
 			<input type=\"priority\" name=\"priority\" placeholder=\"Priority\">
+			<input type=\"submit\" name=\"addrelation\" value=\"Add Relation\">
 		</form>";
 		if (isset($_POST['addrelation'])) {
 			$sid = $_SESSION['user_id'];
