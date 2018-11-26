@@ -1,9 +1,10 @@
 <?php
 	require_once("config.php");
-	
+
 	//Include all function files
 	include("functions_user.php");
-	
+	include("functions_edit_profile.php");
+
 	function dbConnect($selectDB = true) {
 		global $dbConfig, $dbConn;
 		$dbConfig = array(
@@ -12,12 +13,12 @@
 			"user"	=>	"root",
 			"pass"	=>	"websys555"
 		);
-		
+
 		try {
 			//Connect to database defined in config
 			$dbConn = new PDO("mysql:host=" . $dbConfig["host"] . ";", $dbConfig["user"], $dbConfig["pass"]);
 			$dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
+
 			//Select the correct database unless otherwise specified
 			if ($selectDB) {
 				try {
@@ -29,7 +30,7 @@
 		} catch (PDOException $e) {
 			return false;
 		}
-		
+
 		// Return true to indicate we have connected to the database
 		return true;
 	}
