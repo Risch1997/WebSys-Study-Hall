@@ -15,59 +15,47 @@
   }
 
   // function to fetch all courses from the database
-  // function getCourses() {
-  //   global $dbConn, $dbConfig;
-  //   $allCourses = array();
-  //   // SQL Query to get all courses from the database
-	// 	$query = "SELECT * FROM `Courses`";
-  //   $result = $dbConn->query($query);
-  //
-  //   if ($result->rowCount() > 0) {
-  //     $word = gettype($result); //->rowCount();
-  //     echo "<script type='text/javascript'>alert('$word');</script>";
-      // $row = $results->fetch_assoc();
-      // while ($row = $result->fetch_assoc()) {
-      //     printf("'%s'@'%s'\n", $row['title']);
+  function getCourses() {
+    global $dbConn, $dbConfig;
+    $allCourses = array();
+    // SQL Query to get all courses from the database
+		$query = "SELECT * FROM Courses";
+    $result = $dbConn->query($query);
+    if ($result->rowCount() > 0) {
+      // $row = $result->fetch_array(MYSQLI_ASSOC);
+      // printf ("%s (%s)\n", $row["course_id"], $row["subject"]);
+      // while( $row = $result->fetch_array(MYSQLI_ASSOC) ) {
+        // $title = $row["course_name"];
+        // echo "<script type='text/javascript'>alert('$title');</script>";
       // }
-        // $courseOption = "a"; //"<option value=\"" . $row["title"] . "\">" . $row["subject"] . " " . $row["course_number"] . " - "$row["title"] ."</option>";        }
-        // array_push($allCourses, "a");
-        // echo "<script type='text/javascript'>alert('Prefeneces Course function');</script>";
+      // while ($row = mysql_fetch_object($result))) {
+      //     $title = $row->title;
+      //     // printf("'%s'@'%s'\n", $row['title']);
+      //     echo "<script type='text/javascript'>alert('$title');</script>";
       // }
-  //   }
-  //   return $allCourses;
-  // }
+      //   $courseOption = "a"; //"<option value=\"" . $row["title"] . "\">" . $row["subject"] . " " . $row["course_number"] . " - "$row["title"] ."</option>";        }
+      //   array_push($allCourses, "a");
+      //   echo "<script type='text/javascript'>alert('Prefeneces Course function');</script>";
+    }
+    return $allCourses;
+  }
 
-  // function addCourses() {
-  //   global $dbConn, $dbConfig;
-  //
-  //   // SQL Query used to add user to database
-	// 	$query = "INSERT INTO `Sc_relation` (`student_id`, `course_id`, `priority`)
-	// 	VALUES (`$student_id`, `$course_id`, `$priority`)";
-  //
-	// 	// Create the new user in database.
-	// 	$dbConn->exec($query);
-  //
-	// 	// Return true to indicate the new information has been added
-	// 	return true;
-  // }
-  //
-  // function addInfo($id,$month = null, $year = null, $major = null, $minor = null) {
-  //   global $dbConn, $dbConfig;
-  //
-  //   // SQL Query used to add user to database
-	// 	$query = "INSERT INTO `students` (`graduation_month`, `graduation_year`, `major`, `minor`)
-	// 	VALUES (`$student_id`, `$course_id`, `$priority`)";
-  //
-  //   $query = "UPDATE `students`
-  //   SET `graduation_month`=`$month`,
-  //   `graduation_year`=`$year`,
-  //   `major` = `$major`,
-  //   `minor` = `$minor`
-  //   WHERE id=`$id`";
-  //
-	// 	// Create the new user in database.
-	// 	$dbConn->exec($query);
-  //
-	// 	// Return true to indicate the new user has been created successfully
-	// 	return true;
-  // }
+  function updateProfile($id,$fname,$lname,$major, $minor,$semester, $year) {
+    global $dbConn, $dbConfig;
+
+    // SQL Query used to add user to database
+    $query = "UPDATE `Students`
+    SET `first_name`='$fname',
+    `last_name`='$lname',
+    `graduation_semester`='$semester',
+    `graduation_year`='$year',
+    `major` = '$major',
+    `minor` = '$minor'
+    WHERE `user_id`='$id';";
+
+		// Create the new user in database.
+		$dbConn->exec($query);
+
+		// Return true to indicate the new user has been created successfully
+		return true;
+  }
