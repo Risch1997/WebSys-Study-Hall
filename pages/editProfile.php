@@ -1,8 +1,9 @@
 <?php
 	include("../includes/header.php");
-	$courses = sizeof(getCourses());
-	// echo "<script type='text/javascript'>alert('$courses');</script>";
-
+	$courses = json_encode(getCourses());
+	echo "<script type='text/javascript'>console.log('$courses');</script>";
+	// $courses = getCourses();
+	// [0]["course_id"];
 	$id = 4;
 	$currentInfo = getUserProfile($id);
   $first_name = $currentInfo->first_name;
@@ -13,11 +14,23 @@
 	$major = $currentInfo->major;
 	$minor = $currentInfo->minor;
 
-	// $userPreferences = getCurrentInfo($id);
 	if (isset($_POST["preferences"])) {
 		updateProfile($id,$_POST["fname"],$_POST["lname"],$_POST["major"],$_POST["minor"],$_POST["semester"],$_POST["year"] );
 		echo "<meta http-equiv='refresh' content='0'>";
 		echo "<script type='text/javascript'>$('#notification').css('display', 'block');</script>";
+		$courseList = [];
+		// if (isset($_POST["course1"])) {
+		//
+		// }
+		// if (isset($_POST["course2"])) {
+		//
+		// }
+		// if (isset($_POST["course3"])) {
+		//
+		// }
+		// if (isset($_POST["course4"])) {
+		//
+		// }
 	}
 ?>
 
@@ -70,43 +83,65 @@
 				</div>
 				<h1>Course Information</h1>
 				<span>
-					Add your courses according to their importance,
+					Add courses and assign them a priority.
 				</span>
+				<h2>Course Priorities</h2>
 				<div id="coursePriorities">
-					<h2>Course Priorities</h2>
-					<select id="course1" name="course1">
-					</select>
-					<button type="button" class="small-button" onclick="addCourseSelect()">Add Course</button>
+					<div id="courseRow1" class="course-row">
+						<select id="course1Prefix" name="course1Prefix" onchange="onSelectPrefixChange(this.id,this.value);">
+							<option value="CSCI">CSCI</option>
+							<option value="ITWS">ITWS</option>
+							<option value="PHYS">PHYS</option>
+						</select>
+						<select id="course1" name="course1">
+						</select><select id="course1Priority" name="course1Priority">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+						</select>
+					</div>
+					<div id="coursePriorityButtons">
+						<button type="button" class="small-button" onclick="addCourseSelect()">Add Course</button>
+					</div>
 				</div>
 				<input type="submit" name="preferences" value="Save" />
 			</form>
 		</div>
 	</body>
 	<script type="text/javascript">
+		// var courses = <?php echo json_encode($courses) ?>;
+		// console.log(courses);
 		var semester = "<?= $semester ?>";
 		var year = parseInt("<?= $year ?>");
 		var major = "<?= $major ?>";
 		var minor = "<?= $minor ?>";
 		if (semester == "") {
-			$("#semester").val("fall");
-		} else {
-			$("#semester").val(semester);
-		}
-		if (!year) {
-			$("#year").val(2021);
-		} else {
-			$("#year").val(year);
-		}
-		if (major == "") {
-			$("#major").val("Computer Science");
-		} else {
-			$("#major").val(major);
-		}
-		if (minor == "") {
-			$("#minor").val("None");
-		} else {
-			$("#minor").val(minor);
-		}
+	    $("#semester").val("fall");
+	  } else {
+	    $("#semester").val(semester);
+	  }
+	  if (!year) {
+	    $("#year").val(2021);
+	  } else {
+	    $("#year").val(year);
+	  }
+	  if (major == "") {
+	    $("#major").val("Computer Science");
+	  } else {
+	    $("#major").val(major);
+	  }
+	  if (minor == "") {
+	    $("#minor").val("None");
+	  } else {
+	    $("#minor").val(minor);
+	  }
 	</script>
 	<script type="text/javascript" src="../scripts/editProfile.js"></script>
 </html>
