@@ -1,0 +1,35 @@
+#header {
+	position: sticky;
+}
+
+#logo {
+	float: left;
+   	margin: 0;
+    padding: 0;
+}
+
+ol {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+	padding-top: 15px;
+    float: right;
+    display: inline;
+}
+
+li a {
+    font-size: 18px;
+    display: block;
+    color: #d6001c;
+    text-align: center;
+    padding: 10px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #f6ccd1;
+}
