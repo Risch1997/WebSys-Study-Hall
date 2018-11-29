@@ -26,8 +26,8 @@
 
 		// TODO: Ensure all fields are filled out.
 		if (login($email, $password)) {
-			header("Location: index.php");
 			// TODO: Redirect signed in user to dashboard
+			header("Location: index.php");
 		}
 	}
 
