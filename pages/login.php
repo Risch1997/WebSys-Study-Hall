@@ -26,6 +26,7 @@
 
 		// TODO: Ensure all fields are filled out.
 		if (login($email, $password)) {
+			header("Location: index.php");
 			// TODO: Redirect signed in user to dashboard
 		}
 	}
@@ -41,27 +42,27 @@
 	}
 
 	if (isset($_SESSION['user_id'])) {
-		header("Location: index.php");
-		echo "Logged in. ID: " . $_SESSION['user_id'];
+
+		// echo "Logged in. ID: " . $_SESSION['user_id'];
 
 
-		//---EDITED: hzz, NOV 25, TESTING FUNCTIONALITY---
-		$matches = findMatchAll($_SESSION['user_id']);
+		// //---EDITED: hzz, NOV 25, TESTING FUNCTIONALITY---
+		// $matches = findMatchAll($_SESSION['user_id']);
 
-		echo "<h4>Matches</h4>";
-		foreach ($matches as $key => $value) {
-			echo "<p>student_id: ".$key. " Mpts: ".$value."</p>";
-		}
-		echo "<form id=\"add\" method=\"POST\">
-			<input type=\"cid\" name=\"course_id\" placeholder=\"Course Id\">
-			<input type=\"priority\" name=\"priority\" placeholder=\"Priority\">
-			<input type=\"submit\" name=\"add\" value=\"Add\">
-		</form>";
-		//------------------------------------------------
+		// echo "<h4>Matches</h4>";
+		// foreach ($matches as $key => $value) {
+		// 	echo "<p>student_id: ".$key. " Mpts: ".$value."</p>";
+		// }
+		// echo "<form id=\"add\" method=\"POST\">
+		// 	<input type=\"cid\" name=\"course_id\" placeholder=\"Course Id\">
+		// 	<input type=\"priority\" name=\"priority\" placeholder=\"Priority\">
+		// 	<input type=\"submit\" name=\"add\" value=\"Add\">
+		// </form>";
+		// //------------------------------------------------
 
-		echo "<form id=\"logout\" method=\"POST\">
-			<input type=\"submit\" name=\"logout\" value=\"Log Out\">
-		</form>";
+		// echo "<form id=\"logout\" method=\"POST\">
+		// 	<input type=\"submit\" name=\"logout\" value=\"Log Out\">
+		// </form>";
 	}
 ?>
 <div id="logo">
