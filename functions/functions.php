@@ -4,6 +4,9 @@
 	//Include all function files
 	include("functions_user.php");
 	include("functions_edit_profile.php");
+	// EDITED: hzz, Nov 25
+	include("function_screlate.php");
+	include("function_match.php");
 
 	function dbConnect($selectDB = true) {
 		global $dbConfig, $dbConn;
