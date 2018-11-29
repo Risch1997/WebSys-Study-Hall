@@ -5,8 +5,8 @@
 	include("functions_user.php");
 
 	// EDITED: hzz, Nov 25
-	include("function_screlate.php");
-	include("function_match.php");
+	include("functions_screlate.php");
+	include("functions_match.php");
 
 	function dbConnect($selectDB = true) {
 		global $dbConfig, $dbConn;
