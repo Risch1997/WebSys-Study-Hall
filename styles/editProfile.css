@@ -1,8 +1,32 @@
 .center {
     margin: auto;
-    width: 50%;
+    width: 75%;
     border: 3px solid #c65353;
     padding: 10px;
+}
+.course-row {
+  width: 50%;
+  display: inline;
+}
+.course-row > select {
+  width: 25%;
+}
+#notification {
+  display: none;
+  margin: auto;
+  width: 50%;
+  position: relative;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+.success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  border: 1px solid transparent;
+  border-radius: .25rem;
 }
 input[type=text], select {
     width: 100%;

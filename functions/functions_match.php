@@ -1,5 +1,4 @@
 <?php
-
   // Purpose: base on sid genetate a list of students on match rankings
   // Return: all sid of students order by match ranking
 
@@ -46,6 +45,13 @@
   {
     global $dbConn;
     $query = $dbConn->query("SELECT * from Students, Sc_relation WHERE Sc_relation.student_id=Students.user_id AND Sc_relation.course_id='$cid' AND Students.user_id!='$sid';");
+
+    // $results = array();
+
+    //  $matches = $query->fetchAll();
+    // foreach ($matches as $m) {
+    //   $results[$m[0]] = $m[14];
+    // }
 
     return $query->fetchAll();
   }
