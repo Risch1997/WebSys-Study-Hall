@@ -76,7 +76,5 @@
 
 		// Clear browser cookie
 		setcookie(session_name(), time() - 72000);
-
-		header("Location: login.php");
 	}
 ?>

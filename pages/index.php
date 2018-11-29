@@ -1,12 +1,12 @@
 <?php
-  include("../includes/header.php");
+  session_start();
 
   if(isset($_SESSION['user_id'])) {
     echo "Your session is running " . $_SESSION['user_id'];
   }
 
   if (isset($_POST['logout'])) {
-    logout();
+    header("Location: login.php");
   }
 ?>
 <!DOCTYPE html>
