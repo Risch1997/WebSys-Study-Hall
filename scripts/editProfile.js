@@ -1,37 +1,36 @@
-// var courses = [
-//   {
-//     prefix: "CSCI",
-//     title: "Foundations of Computer Science",
-//     crn: 2200,
-//   },
-//   {
-//     prefix: "CSCI",
-//     title: "Data Scructures",
-//     crn: 1200,
-//   },
-//   {
-//     prefix: "ITWS",
-//     title: "Introduction to Information Technology and Web Science",
-//     crn: 1100,
-//   },
-//   {
-//     prefix: "CSCI",
-//     title: "Computer Science 1",
-//     crn: 1100,
-//   },
-//   {
-//     prefix: "MATH",
-//     title: "Multivariable Calculus and Matrix Algebra",
-//     crn: 2010,
-//   }
-// ];
+function onSelectPrefixChange(id,prefix) {
+  var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');  // XMLHttpRequest instance
 
-function populateCourses() {
+  // create pairs index=value with data that must be sent to php
+  var data = 'prefix='+prefix;
+  request.open("POST", '../functions/functions_edit_profile.php', true);    // set the request
+
+  // adds  a header to tell the PHP script to recognize the data as is sent via POST
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.send(data);		// sends datas to php
+
+  request.onreadystatechange = function() {
+    if(request.readyState == 4) {
+      console.log(request.responseText);
+    }
+  }
+};
+
+//Populate an input list with courses
+function populateCourses(id, prefix) {
   for (var i in courses) {
-    $("#course1").append("<option value=\""+courses[i].title +"\">"+courses[i].title+"</option>");
+    $("#course"+id).append("<option value=\""+courses[i].title +"\">"+courses[i].title+"</option>");
   }
 }
 
+//Populate an input list with course prefixes
+function populatePrefixes(id) {
+  for (var i in prefixes) {
+    $("#course"+id+"Prefix").append("<option value=\""+prefixes[i]["subject"]+"\">"+prefixes[i]["subject"]+"</option>");
+  }
+}
+
+//Add a Course Selection row to the form
 function addCourseSelect() {
   var selectCount = $('.course-row').length;
   if (selectCount != 4) {
@@ -60,6 +59,7 @@ function addCourseSelect() {
   }
 }
 
+// Remove a Course Select row to the form
 function removeCourseSelect() {
   var num = $('.course-row').length;;
   if (num == 2) {
@@ -71,6 +71,27 @@ function removeCourseSelect() {
 }
 
 $(document).ready(function(){
-    // console.log(courses);
-  // populateCourses();
+
+  // Set all the user's saved profile information in the form
+  if (semester == "") {
+    $("#semester").val("fall");
+  } else {
+    $("#semester").val(semester);
+  }
+  if (!year) {
+    $("#year").val(2021);
+  } else {
+    $("#year").val(year);
+  }
+  if (major == "") {
+    $("#major").val("Computer Science");
+  } else {
+    $("#major").val(major);
+  }
+  if (minor == "") {
+    $("#minor").val("None");
+  } else {
+    $("#minor").val(minor);
+  }
+  populatePrefixes("1");
 });

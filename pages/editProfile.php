@@ -1,11 +1,8 @@
 <?php
 	include("../includes/header.php");
-	$courses = json_encode(getCourses());
-	echo "<script type='text/javascript'>console.log('$courses');</script>";
-	// $courses = getCourses();
-	// [0]["course_id"];
 	$id = 4;
 	$currentInfo = getUserProfile($id);
+	$prefixes = getPrefixes();
   $first_name = $currentInfo->first_name;
 	$last_name = $currentInfo->last_name;
 	$email = $currentInfo->email;
@@ -89,9 +86,6 @@
 				<div id="coursePriorities">
 					<div id="courseRow1" class="course-row">
 						<select id="course1Prefix" name="course1Prefix" onchange="onSelectPrefixChange(this.id,this.value);">
-							<option value="CSCI">CSCI</option>
-							<option value="ITWS">ITWS</option>
-							<option value="PHYS">PHYS</option>
 						</select>
 						<select id="course1" name="course1">
 						</select><select id="course1Priority" name="course1Priority">
@@ -116,32 +110,11 @@
 		</div>
 	</body>
 	<script type="text/javascript">
-		// var courses = <?php echo json_encode($courses) ?>;
-		// console.log(courses);
+		var prefixes = <?php echo json_encode($prefixes) ?>;
 		var semester = "<?= $semester ?>";
 		var year = parseInt("<?= $year ?>");
 		var major = "<?= $major ?>";
 		var minor = "<?= $minor ?>";
-		if (semester == "") {
-	    $("#semester").val("fall");
-	  } else {
-	    $("#semester").val(semester);
-	  }
-	  if (!year) {
-	    $("#year").val(2021);
-	  } else {
-	    $("#year").val(year);
-	  }
-	  if (major == "") {
-	    $("#major").val("Computer Science");
-	  } else {
-	    $("#major").val(major);
-	  }
-	  if (minor == "") {
-	    $("#minor").val("None");
-	  } else {
-	    $("#minor").val(minor);
-	  }
 	</script>
 	<script type="text/javascript" src="../scripts/editProfile.js"></script>
 </html>
