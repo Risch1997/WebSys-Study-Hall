@@ -8,20 +8,20 @@
     padding: 0;
 }
 
-ol {
+#header ol {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
 
-li {
+#header li {
 	padding-top: 15px;
     float: right;
     display: inline;
 }
 
-li a {
+#header li a {
     font-size: 18px;
     display: block;
     color: #d6001c;
@@ -30,6 +30,6 @@ li a {
     text-decoration: none;
 }
 
-li a:hover {
+#header li a:hover {
     background-color: #f6ccd1;
 }
