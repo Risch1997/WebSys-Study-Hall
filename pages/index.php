@@ -33,7 +33,7 @@
       <br />
       <div>
         <ol>
-          <li><a href="">Browse for Matches</a></li>
+          <li><a href="browse.php">Browse for Matches</a></li>
           <li><a href="">My Matches</a></li>
           <li><a href="">My Profile</a></li>
         </ol>
