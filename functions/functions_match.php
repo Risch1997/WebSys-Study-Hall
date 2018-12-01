@@ -34,17 +34,45 @@
       }
     }
 
-    return $results;
+    $output = array();
+
+    foreach ($results as $key => $value) {
+
+      $query = $dbConn->query("SELECT * FROM `Students` as s1 WHERE s1.user_id='$key'");
+
+      $tmp_db = $query->fetchObject();
+
+      $tmp = array(
+        'first_name' => $tmp_db->first_name,
+        'last_name' => $tmp_db->first_name,
+        'email' => $tmp_db->email,
+        'priority' => $value
+      );
+
+      array_push($output, $tmp);
+    }
+
+    return $output;
   }
 
   // Purpose: base on sid genetate a list of students on course match rankings
   // Return: all sid of students order by course match ranking
 
   // TODO: for now it return all students's data, NEEDS TOBE CHENGED
-  function findMatchCourse($sid, $cid)
+  function findMatchCourse($sid, $subject, $number)
   {
     global $dbConn;
-    $query = $dbConn->query("SELECT * from Students, Sc_relation WHERE Sc_relation.student_id=Students.user_id AND Sc_relation.course_id='$cid' AND Students.user_id!='$sid';");
+
+    $query = $dbConn->query("SELECT `course_id` FROM `Courses` WHERE `subject`='$subject' AND `course_number`='$number';");
+
+    if ($query->rowCount() == 1) {
+      $query = $query->fetchObject();
+      $cid = $query->course_id;
+
+      $query = $dbConn->query("SELECT first_name,last_name,email,priority from Students, Sc_relation WHERE Sc_relation.student_id=Students.user_id AND Sc_relation.course_id='$cid' AND Students.user_id!='$sid' ORDER BY Sc_relation.priority DESC;");
+
+      return $query->fetchAll();
+    }
 
     // $results = array();
 
@@ -52,8 +80,6 @@
     // foreach ($matches as $m) {
     //   $results[$m[0]] = $m[14];
     // }
-
-    return $query->fetchAll();
   }
 
   // Purpose: add single record to db
@@ -67,4 +93,7 @@
     $dbConn->exec($query);
     return True;
   }
+
+  // Return a list of exist matches.
+  // function listMatch()
  ?>
