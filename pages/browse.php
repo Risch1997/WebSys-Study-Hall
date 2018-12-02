@@ -80,7 +80,7 @@
           <ol>
             <li><a href="browse.php">Browse for Matches</a></li>
             <li><a href="">My Matches</a></li>
-            <li><a href="">My Profile</a></li>
+            <li><a href="editProfile.php">My Profile</a></li>
           </ol>
           <form id="logout" method="POST">
             <input type="submit" name="logout" value="Log Out">

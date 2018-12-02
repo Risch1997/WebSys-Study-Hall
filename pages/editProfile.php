@@ -4,15 +4,15 @@
 	echo "<script type='text/javascript'>console.log('$courses');</script>";
 	// $courses = getCourses();
 	// [0]["course_id"];
-	$id = 4;
+	$id = $_SESSION['user_id'];
 	$currentInfo = getUserProfile($id);
   $first_name = $currentInfo->first_name;
 	$last_name = $currentInfo->last_name;
 	$email = $currentInfo->email;
-	$semester = $currentInfo->graduation_month;
-	$year = $currentInfo->graduation_year;
-	$major = $currentInfo->major;
-	$minor = $currentInfo->minor;
+	$semester = $currentInfo->graduation_semester ?: 'NULL';
+	$year = $currentInfo->graduation_year ?: 'NULL';
+	$major = $currentInfo->major ?: 'NULL';
+	$minor = $currentInfo->minor ?: 'NULL';
 
 	if (isset($_POST["preferences"])) {
 		updateProfile($id,$_POST["fname"],$_POST["lname"],$_POST["major"],$_POST["minor"],$_POST["semester"],$_POST["year"] );
