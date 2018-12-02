@@ -1,8 +1,7 @@
 <?php
 	include("../includes/header.php");
-	$id = 4;
+	$id = 4; // TODO: REPLACE WITH USER-ID STORED IN SESSION VARIABLE
 	$currentInfo = getUserProfile($id);
-	$prefixes = getPrefixes();
   $first_name = $currentInfo->first_name;
 	$last_name = $currentInfo->last_name;
 	$email = $currentInfo->email;
@@ -11,23 +10,28 @@
 	$major = $currentInfo->major;
 	$minor = $currentInfo->minor;
 
-	if (isset($_POST["preferences"])) {
+	if (isset($_POST["profile"])) {
+		$selectedCourses= array();
+		if (isset($_POST["course1-id"]) && isset($_POST["course1Priority"])) {
+			$course1 = array($_POST["course1-id"],$_POST["course1Priority"]);
+			array_push($selectedCourses, $course1);
+		}
+		if (isset($_POST["course2-id"]) && isset($_POST["course2Priority"])) {
+			$course2 = array($_POST["course2-id"],$_POST["course2Priority"]);
+			array_push($selectedCourses, $course2);
+		}
+		if (isset($_POST["course3-id"]) && isset($_POST["course3Priority"])) {
+			$course3 = array($_POST["course3-id"],$_POST["course3Priority"]);
+			array_push($selectedCourses, $course3);
+		}
+		if (isset($_POST["course4-id"]) && isset($_POST["course4Priority"])) {
+			$course4 = array($_POST["course4-id"],$_POST["course4Priority"]);
+			array_push($selectedCourses, $course4);
+		}
 		updateProfile($id,$_POST["fname"],$_POST["lname"],$_POST["major"],$_POST["minor"],$_POST["semester"],$_POST["year"] );
+		updateCourses($id, $selectedCourses);
 		echo "<meta http-equiv='refresh' content='0'>";
-		echo "<script type='text/javascript'>$('#notification').css('display', 'block');</script>";
-		$courseList = [];
-		// if (isset($_POST["course1"])) {
-		//
-		// }
-		// if (isset($_POST["course2"])) {
-		//
-		// }
-		// if (isset($_POST["course3"])) {
-		//
-		// }
-		// if (isset($_POST["course4"])) {
-		//
-		// }
+		echo "<script type='text/javascript'>$('#notification').show();</script>";
 	}
 ?>
 
@@ -36,7 +40,7 @@
 		  Profile was successfully updated!
 		</div>
 		<div class="center">
-			<form id="preferences" method="POST">
+			<form id="profle" method="POST">
 				<h1>Student Information</h1>
 				<div>
 					<p>
@@ -49,13 +53,13 @@
 						<label for="email">Email:</label>
 						<input type="text" name="email" id="email" value=<?php echo $email;?> readonly/>
 
-						<label for="major">Major</label>
+						<label for="major">Major:</label>
 						<select id="major" name="major">
 						  <option value="Computer Science">Computer Science</option>
 							<option value="Information Technology and Web Science">Information Technology and Web Science</option>
 							<option value="Mechanical Engineering">Mechanical Engineering</option>
 						</select>
-						<label for="minor">Minor</label>
+						<label for="minor">Minor:</label>
 						<select id="minor" name="minor">
 							<option value="None">None</option>
 							<option value="Computer Science">Computer Science</option>
@@ -82,39 +86,41 @@
 				<span>
 					Add courses and assign them a priority.
 				</span>
-				<h2>Course Priorities</h2>
 				<div id="coursePriorities">
-					<div id="courseRow1" class="course-row">
-						<select id="course1Prefix" name="course1Prefix" onchange="onSelectPrefixChange(this.id,this.value);">
-						</select>
-						<select id="course1" name="course1">
-						</select><select id="course1Priority" name="course1Priority">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</div>
-					<div id="coursePriorityButtons">
-						<button type="button" class="small-button" onclick="addCourseSelect()">Add Course</button>
-					</div>
 				</div>
-				<input type="submit" name="preferences" value="Save" />
+					<input  class="small-button" type="submit" name="profile" value="Save" />
 			</form>
 		</div>
 	</body>
+
 	<script type="text/javascript">
-		var prefixes = <?php echo json_encode($prefixes) ?>;
+		var allCourses = <?php echo json_encode(getCourses()) ?>;
+		var currentCourses = 	<?php echo json_encode(getUserCourses($id)) ?>;
 		var semester = "<?= $semester ?>";
 		var year = parseInt("<?= $year ?>");
 		var major = "<?= $major ?>";
 		var minor = "<?= $minor ?>";
+		$('#notification').hide();
+		if (semester == "") {
+	    $("#semester").val("fall");
+	  } else {
+	    $("#semester").val(semester);
+	  }
+	  if (!year) {
+	    $("#year").val(2021);
+	  } else {
+	    $("#year").val(year);
+	  }
+	  if (major == "") {
+	    $("#major").val("Computer Science");
+	  } else {
+	    $("#major").val(major);
+	  }
+	  if (minor == "") {
+	    $("#minor").val("None");
+	  } else {
+	    $("#minor").val(minor);
+	  }
 	</script>
 	<script type="text/javascript" src="../scripts/editProfile.js"></script>
 </html>
