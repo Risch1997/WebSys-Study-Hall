@@ -1,65 +1,78 @@
-function onSelectPrefixChange(id,prefix) {
-  var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');  // XMLHttpRequest instance
 
-  // create pairs index=value with data that must be sent to php
-  var data = 'prefix='+prefix;
-  request.open("POST", '../functions/functions_edit_profile.php', true);    // set the request
-
-  // adds  a header to tell the PHP script to recognize the data as is sent via POST
-  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  request.send(data);		// sends datas to php
-
-  request.onreadystatechange = function() {
-    if(request.readyState == 4) {
-      console.log(request.responseText);
-    }
+// Populates a course-select dropdown using the course list
+function populateCourses(num) {
+  for (var i in allCourses) {
+    $("#courseList"+num).append("<option course-id=\""+allCourses[i].course_id+"\" value=\""  +allCourses[i].subject+" "
+    +allCourses[i].course_number+"-"+allCourses[i].course_name+ "\" course_id=\""
+    +"\"></option>");
   }
-};
 
-//Populate an input list with courses
-function populateCourses(id, prefix) {
-  for (var i in courses) {
-    $("#course"+id).append("<option value=\""+courses[i].title +"\">"+courses[i].title+"</option>");
-  }
+  $('#course'+num).change(function(){
+      var course_id = $("#courseList"+num+" option[value='" + $('#course'+num).val() + "']").attr('course-id');
+      $('#course'+num+'-id').val(course_id);
+  });
 }
 
-//Populate an input list with course prefixes
-function populatePrefixes(id) {
-  for (var i in prefixes) {
-    $("#course"+id+"Prefix").append("<option value=\""+prefixes[i]["subject"]+"\">"+prefixes[i]["subject"]+"</option>");
+function showCurrentCourses() {
+  for (var i=0; i < currentCourses.length; i++) {
+    addCourseSelect();
+    var num = (i+1).toString();
+    var courseObject = allCourses[currentCourses[i]["course_id"] - 1]
+    var listVal = courseObject.subject+" "+courseObject.course_number+"-"+courseObject.course_name
+    $("#course"+num).val(listVal);
+    $("#course"+num+"-id").val(currentCourses[i]["course_id"]);
+    $("#course"+num+"Priority").val(currentCourses[i]["priority"]);
   }
+
 }
 
-//Add a Course Selection row to the form
+// Adds another course-select option to the form
 function addCourseSelect() {
   var selectCount = $('.course-row').length;
+
   if (selectCount != 4) {
     var num = (selectCount+1).toString();
-    var newDiv = "<div id=\"courseRow"+num+"\" class='course-row'>";
-    var removeId = "removeCourseSelect"+num;
-    var selectList = "<select id=\"course"+num+"\" name=\"course"+num+"\">";
-    for (var i in courses) {
-      selectList+="<option value=\""+courses[i].title +"\">"+courses[i].title+"</option>";
-    }
-    selectList+="</select>";
-    newDiv+=selectList;
+    var newDiv = "<br><div id=\"courseRow"+num+"\" class='course-row'>";
+    var courseLabel = "<label for=\"course"+num+"\">Course: </label>";
+    var inputList = "<input id=\"course"+num+"\" list=\"courseList"+num+"\" name=\"course"+num+"\">";
+    var dataList =  "<datalist id=\"courseList"+num+"\"></datalist>";
+    var hiddenVal = "<input id=\"course"+num+"-id\" type=\"hidden\" name=\"course"+num+"-id\"/>";
+
+    dataList+=hiddenVal
+    inputList+=dataList;
+
+    newDiv+=courseLabel;
+    newDiv+=inputList;
+
+    var priorityLabel= "<label for=\"course"+num+"Priority\">  Priority: </label>";
     var priorityList = "<select id=\"course"+num+"Priority\" name=\"course"+num+"Priority\">";
     for (var i=1;i < 11;i++) {
       priorityList+="<option value="+i+">"+i+"</option>";
     }
     priorityList+="</select>";
+    newDiv+=priorityLabel;
     newDiv+=priorityList;
     newDiv+="</div>";
 
-    $(newDiv).insertAfter("#courseRow"+(selectCount));
-    if (selectCount == 2) {
-      var removeButton = "<button id=\"removeButton\" type=\"button\" class=\"small-button\" onclick=\"removeCourseSelect()\">Remove Course</button>";
-      $("#coursePriorityButtons").append(removeButton);
+    if (selectCount == 0) {
+      var buttonDiv = "<div id=\"coursePriorityButtons\"> \
+        <button type=\"button\" class=\"small-button\" onclick=\"addCourseSelect()\">Add Course</button> \
+      </div>";
+      newDiv += buttonDiv;
+      $("#coursePriorities").append(newDiv);
     }
+    else if (selectCount > 0) {
+      $(newDiv).insertAfter("#courseRow"+(selectCount));
+      if (selectCount == 1) {
+        var removeButton = "<button id=\"removeButton\" type=\"button\" class=\"small-button\" onclick=\"removeCourseSelect()\">Remove Course</button>";
+        $("#coursePriorityButtons").append(removeButton);
+      }
+    }
+    populateCourses(num);
   }
 }
 
-// Remove a Course Select row to the form
+// Removes a course-select option from the form
 function removeCourseSelect() {
   var num = $('.course-row').length;;
   if (num == 2) {
@@ -71,27 +84,10 @@ function removeCourseSelect() {
 }
 
 $(document).ready(function(){
-
-  // Set all the user's saved profile information in the form
-  if (semester == "") {
-    $("#semester").val("fall");
+  // populateCourses("1");
+  if (currentCourses.length > 0) {
+    showCurrentCourses();
   } else {
-    $("#semester").val(semester);
+    addCourseSelect();
   }
-  if (!year) {
-    $("#year").val(2021);
-  } else {
-    $("#year").val(year);
-  }
-  if (major == "") {
-    $("#major").val("Computer Science");
-  } else {
-    $("#major").val(major);
-  }
-  if (minor == "") {
-    $("#minor").val("None");
-  } else {
-    $("#minor").val(minor);
-  }
-  populatePrefixes("1");
 });
