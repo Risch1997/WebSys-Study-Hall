@@ -13,6 +13,7 @@ function populateCourses(num) {
   });
 }
 
+// Pre fills the course-form with the user's data
 function showCurrentCourses() {
   for (var i=0; i < currentCourses.length; i++) {
     addCourseSelect();
@@ -26,7 +27,7 @@ function showCurrentCourses() {
 
 }
 
-// Adds another course-select option to the form
+// Add a another course-select option to the form
 function addCourseSelect() {
   var selectCount = $('.course-row').length;
 
@@ -84,7 +85,29 @@ function removeCourseSelect() {
 }
 
 $(document).ready(function(){
-  // populateCourses("1");
+  $('#notification').hide();
+
+  // Pre fill the form with the user's stored data
+  if (semester == "") {
+    $("#semester").val("fall");
+  } else {
+    $("#semester").val(semester);
+  }
+  if (!year) {
+    $("#year").val(2021);
+  } else {
+    $("#year").val(year);
+  }
+  if (major == "") {
+    $("#major").val("Computer Science");
+  } else {
+    $("#major").val(major);
+  }
+  if (minor == "") {
+    $("#minor").val("None");
+  } else {
+    $("#minor").val(minor);
+  }
   if (currentCourses.length > 0) {
     showCurrentCourses();
   } else {

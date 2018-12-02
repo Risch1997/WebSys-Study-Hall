@@ -100,27 +100,6 @@
 		var year = parseInt("<?= $year ?>");
 		var major = "<?= $major ?>";
 		var minor = "<?= $minor ?>";
-		$('#notification').hide();
-		if (semester == "") {
-	    $("#semester").val("fall");
-	  } else {
-	    $("#semester").val(semester);
-	  }
-	  if (!year) {
-	    $("#year").val(2021);
-	  } else {
-	    $("#year").val(year);
-	  }
-	  if (major == "") {
-	    $("#major").val("Computer Science");
-	  } else {
-	    $("#major").val(major);
-	  }
-	  if (minor == "") {
-	    $("#minor").val("None");
-	  } else {
-	    $("#minor").val(minor);
-	  }
 	</script>
 	<script type="text/javascript" src="../scripts/editProfile.js"></script>
 </html>
