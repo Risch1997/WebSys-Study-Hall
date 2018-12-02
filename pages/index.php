@@ -3,7 +3,7 @@
   include("../includes/header.php");
 
   if(isset($_SESSION['user_id'])) {
-    echo "Your session is running " . $_SESSION['user_id'];
+
   }
 ?>
 <!DOCTYPE html>

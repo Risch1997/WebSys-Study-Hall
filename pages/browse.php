@@ -4,7 +4,7 @@
 
   $data;
   if(isset($_SESSION['user_id'])) {
-    echo "Your session is running " . $_SESSION['user_id'];
+    // echo "Your session is running " . $_SESSION['user_id'];
   }
   if(isset($_POST['search'])) {
     echo "<script>console.log( 'Starting Search..." . "' );</script>";
