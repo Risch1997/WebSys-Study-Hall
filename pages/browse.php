@@ -1,6 +1,6 @@
 <?php
 
-  include("../includes/header.php");
+  include("../includes/header-browse.php");
 
   $data;
   if(isset($_SESSION['user_id'])) {
@@ -26,64 +26,8 @@
   }
 
 ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Web Systems and Development: Study Hall</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="../studyHallCSS.css">
-    <link rel="stylesheet" href="../styles/studyHall.css">
-    <script src="../scripts/studyHall.js" type="text/javascript" charset="utf-8" async defer></script>
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <style type="text/css">
-      * {
-        box-sizing: border-box;
-        }
-
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-      }
-
-      /* Float four columns side by side */
-      .column {
-        float: left;
-        width: 25%;
-        padding: 0 10px;
-      }
-
-      /* Remove extra left and right margins, due to padding */
-      .row {margin: 0 -5px;}
-
-      /* Clear floats after the columns */
-      .row:after {
-        content: "";
-        display: table;
-        clear: both;
-      }
-
-      /* Responsive columns */
-      @media screen and (max-width: 600px) {
-        .column {
-          width: 100%;
-          display: block;
-          margin-bottom: 20px;
-        }
-      }
-
-      /* Style the counter cards */
-      .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        padding: 10px;
-        text-align: center;
-        background-color: #c65353;
-        color: white;
-        margin: 8px 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div style="width: 100%" id = "header">
-    <div >
+    <div style="width: 100%" id="header">
+    <div>
       <hr>
         <div id="logo">
           <a href="index.php">
@@ -103,18 +47,20 @@
           </form> -->
         </div>
         <br />
-        <div class="center">
-          <form id="search" method="POST">
-            <input type="text" name="subject" placeholder="Subject">
-            <input type="text" name="number" placeholder="Number">
-            <input type="submit" name="search" value="Search">
-          </form>
-        </div>
         <hr>
       </div>
     </div>
+    <div id="search-div" class="center">
+      <h1>Search</h1>
+      <form id="search" method="POST">
+        <input type="text" name="subject" placeholder="Subject">
+        <input type="text" name="number" placeholder="Number">
+        <input type="submit" name="search" value="Search">
+      </form>
+    </div>
     <div id="matches-list" class="matches row">
       <h1>Found Matches:</h1>
+      <hr>
     </div>
     </ul>
   </body>
@@ -124,23 +70,23 @@
     // Sort the list of matches by priority (descending order)
     if (obj) {
       obj.sort(function (a, b) {
-          // a and b will be two instances of your object from your list
+        // a and b will be two instances of your object from your list
 
-          // possible return values
-          var a1st = -1; // negative value means left item should appear first
-          var b1st =  1; // positive value means right item should appear first
-          var equal = 0; // zero means objects are equal
+        // possible return values
+        var a1st = -1; // negative value means left item should appear first
+        var b1st =  1; // positive value means right item should appear first
+        var equal = 0; // zero means objects are equal
 
-          // compare object priority values and determine their order
-          if (a.priority < b.priority) {
-              return b1st;
-          }
-          else if (b.priority < a.priority) {
-              return a1st;
-          }
-          else {
-              return equal;
-          }
+        // compare object priority values and determine their order
+        if (a.priority < b.priority) {
+          return b1st;
+        }
+        else if (b.priority < a.priority) {
+          return a1st;
+        }
+        else {
+          return equal;
+        }
       });
     }
   </script>
