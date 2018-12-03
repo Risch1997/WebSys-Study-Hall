@@ -5,7 +5,7 @@
   $first_name = $currentInfo->first_name;
 	$last_name = $currentInfo->last_name;
 	$email = $currentInfo->email;
-	$semester = $currentInfo->graduation_month;
+	$semester = $currentInfo->graduation_semester;
 	$year = $currentInfo->graduation_year;
 	$major = $currentInfo->major;
 	$minor = $currentInfo->minor;
