@@ -1,5 +1,10 @@
 <?php
 	include("../includes/header.php");
+  
+  if(!isset($_SESSION['user_id'])) {
+    header("Location: ../homepage.html");
+  }
+  
 	$id = $_SESSION['user_id'];
 	$currentInfo = getUserProfile($id);
   $first_name = $currentInfo->first_name;
@@ -35,7 +40,6 @@
 	}
 ?>
 
-		<h1>Study Hall</h1>
 		<div id="notification" class="success">
 		  Profile was successfully updated!
 		</div>

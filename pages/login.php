@@ -8,14 +8,12 @@
 	// Handle new user
 	if (isset($_POST["register"])) {
 		// Get input values from form
-		// TODO: make input strings safe
-		$email = $_POST["email"];
-		$first_name = $_POST["first_name"];
-		$last_name = $_POST["last_name"];
-		$password = $_POST["password"];
-		$school = $_POST["school"];
+		$email = mysql_real_escape_string($_POST["email"]);
+		$first_name = mysql_real_escape_string($_POST["first_name"]);
+		$last_name = mysql_real_escape_string($_POST["last_name"]);
+		$password = mysql_real_escape_string($_POST["password"]);
+		$school = mysql_real_escape_string($_POST["school"]);
 
-		// TODO: Ensure all fields are filled out
 		if (createUser($email, $first_name, $last_name, $password, $school)) {
       if (login($email, $password)) {
         header("Location: mymatches.php");
@@ -26,11 +24,9 @@
 	// Handle a signing in user
 	if (isset($_POST['login'])) {
 		// Get input values from form
-		// TODO: make input strings safe
-		$email = $_POST['email'];
-		$password = $_POST['password'];
+		$email = mysql_real_escape_string($_POST['email']);
+		$password = mysql_real_escape_string($_POST['password']);
 
-		// TODO: Ensure all fields are filled out.
 		if (login($email, $password)) {
 			header("Location: mymatches.php");
 		}
@@ -55,11 +51,6 @@
 		// </form>";
 	}
 ?>
-<div id="logo">
-  <a href="">
-    <img src="../studyHallLogo.png" alt="Logo for the Study Hall Site" height="100">
-  </a>
-</div>
 <form class=wrap id="register" method="POST">
 	<input type="email" name="email" placeholder="Email Address" required>
 	<input type="text" name="first_name" placeholder="First Name" required>

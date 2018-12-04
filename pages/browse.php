@@ -2,8 +2,8 @@
 
   include("../includes/header.php");
 
-  if(isset($_SESSION['user_id'])) {
-
+  if(!isset($_SESSION['user_id'])) {
+    header("Location: ../homepage.html");
   }
   
   if (isset($_POST['invite'])) {

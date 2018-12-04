@@ -40,7 +40,7 @@ input[list] {
   background-color: rgb(204, 204, 204);
   width: 50%;
 }
-input[type=submit] {
+.editProfileButton {
     width: 100%;
     background-color: #c65353;
     color: white;
