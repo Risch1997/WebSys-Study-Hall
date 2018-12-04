@@ -30,7 +30,7 @@
     global $dbConn, $dbConfig;
     $allCourses = array();
     // SQL Query to get all courses from the database
-		$query =  "SELECT * FROM `Courses` LIMIT 200;";
+		$query =  "SELECT * FROM `Courses`;";
     $result = $dbConn->query($query);
 
     if ($result->rowCount() > 0) {
