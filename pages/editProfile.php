@@ -70,8 +70,8 @@
 					<p>
 						<label for="semester">Graduation</label>
 						<select id="semester" name="semester">
-						  <option value="fall">Fall</option>
-							<option value="spring">Spring</option>
+						  <option value="Fall">Fall</option>
+							<option value="Spring">Spring</option>
 						</select>
 						<select id="year" name="year">
 							<option value=2019>2019</option>
