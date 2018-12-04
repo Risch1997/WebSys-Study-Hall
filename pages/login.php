@@ -1,5 +1,9 @@
 <?php
 	include("../includes/header.php");
+  
+  if (isset($_SESSION['user_id'])) {
+    header("Location: mymatches.php");
+  }
 
 	// Handle new user
 	if (isset($_POST["register"])) {
@@ -13,7 +17,9 @@
 
 		// TODO: Ensure all fields are filled out
 		if (createUser($email, $first_name, $last_name, $password, $school)) {
-			// TODO: Redirect new user to dashboard and have them signed in.
+      if (login($email, $password)) {
+        header("Location: mymatches.php");
+      }
 		}
 	}
 
@@ -26,8 +32,7 @@
 
 		// TODO: Ensure all fields are filled out.
 		if (login($email, $password)) {
-			// TODO: Redirect signed in user to dashboard
-			header("Location: index.php");
+			header("Location: mymatches.php");
 		}
 	}
 

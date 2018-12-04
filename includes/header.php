@@ -1,11 +1,6 @@
 <?php
 	session_start();
 	include_once("../functions/load.php");
-
-	if (isset($_POST['logout'])) {
-		logout();
-		header("Location: ../pages/login.php");
-	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,9 +36,6 @@
             <li><a href="editProfile.php">My Profile</a></li>
             <li><a href="logout.php">Log Out</a></li>
           </ol>
-          <form id="logout" method="POST">
-            <input type="submit" name="logout" value="Log Out">
-          </form>
         </div>
         <br />
         <hr>

@@ -41,7 +41,7 @@
     echo "
         <form method=\"POST\">
           <input type=\"hidden\" name=\"studentId\" value=\"" . $student['user_id'] . "\" />
-          <input type=\"submit\" name=\"invite\" value=\"Invite\" />
+          <input type=\"submit\" class=\"inviteButton\" name=\"invite\" value=\"Invite\" />
         </form>
       </div>
     </div>";    
