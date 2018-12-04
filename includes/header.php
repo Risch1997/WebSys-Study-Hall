@@ -19,6 +19,9 @@
     </style>
   </head>
   <body>
+    <?php
+      if (isset($_SESSION['user_id'])) {
+    ?>
     <div style="width: 100%" id = "header">
       <div >
         <hr>
@@ -40,3 +43,6 @@
         <hr>
       </div>
     </div>
+    <?php
+      }
+    ?>

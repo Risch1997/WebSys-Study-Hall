@@ -44,10 +44,13 @@
         
         $courses2 = $courseQuery2->fetchAll();
         
+        $commonCourse = false;
         // Add the current student's priority for a course if they are also in the course
         foreach ($courses1 as $course1) {
           foreach ($courses2 as $course2) {
             if ($course1['course_id'] === $course2['course_id']) {
+              $commonCourse = true;
+              
               $courseId = $course1['course_id'];
               $scQuery = $dbConn->prepare("SELECT * FROM `Sc_relation` WHERE `student_id` = ? AND `course_id` = ?;");
               $scQuery->execute(array($id, $courseId));
@@ -58,8 +61,10 @@
           }
         }
         
-        // Add the score to the array
-        $scores[$studentId] = $score;
+        // Add the score to the array if they have at least 1 common course
+        if ($commonCourse) {
+          $scores[$studentId] = $score;
+        }
       }
       
       arsort($scores);

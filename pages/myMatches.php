@@ -41,18 +41,12 @@
           </div>
         </div>
         <div id="accepted" class="column">
-
             <h2>Matches:</h2>
             <hr>
-
             <div class="card-container">
-
             </div>
-          </div>
-
         </div>
-      </div>
-    </ul>
+    </div>
   </body>
   <script>
     var allPending = <?php echo json_encode($pending) ?>;

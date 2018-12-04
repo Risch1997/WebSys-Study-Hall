@@ -1,5 +1,10 @@
 <?php
 	include("../includes/header.php");
+
+  if(!isset($_SESSION['user_id'])) {
+    header("Location: ../homepage.html");
+  }
+
 	$id = $_SESSION['user_id'];
 	$currentInfo = getUserProfile($id);
   $first_name = $currentInfo->first_name;
@@ -33,7 +38,6 @@
 		echo "<script type='text/javascript'>alert('Saved Changes');</script>";
 	}
 ?>
-
 
 		<div class="center">
 			<form id="profle" method="POST">
