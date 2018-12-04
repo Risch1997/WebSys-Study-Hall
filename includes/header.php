@@ -26,7 +26,7 @@
       <div >
         <hr>
         <div id="logo">
-          <a href="index.php">
+          <a href="homepage.html">
             <img src="../studyHallLogo.png" alt="Logo for the Study Hall Site" height="100">
           </a>
         </div>
