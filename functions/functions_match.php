@@ -103,12 +103,12 @@
   function pendingMatchAll($sid) {
     global $dbConn;
 
-    $stmt = $dbConn->prepare("SELECT Students.first_name, Students.first_name, Students.graduation_semester, Students.graduation_year, Students.major
+    $stmt = $dbConn->prepare("SELECT Matches.match_id, Students.first_name, Students.first_name, Students.graduation_semester, Students.graduation_year, Students.major
       FROM Matches, Students where Matches.student_id2 = ? AND Matches.status = 'Pending'
       AND Students.user_id = Matches.student_id1");
     $stmt->bindParam(1, $sid);
 
-    $stmt->exec();
+    $stmt->execute();
 
     return $stmt->fetchAll();
   }
@@ -124,17 +124,17 @@
     global $dbConn;
 
     $stmt = $dbConn->prepare("
-      SELECT Students.first_name, Students.last_name, Students.graduation_semester, Students.graduation_year, Students.major
+      SELECT Matches.match_id, Students.first_name, Students.last_name, Students.graduation_semester, Students.graduation_year, Students.major
       FROM Matches, Students where Matches.student_id2 = ? AND Matches.status = 'Accepted'
       AND Students.user_id = Matches.student_id1
       UNION
-      SELECT Students.first_name, Students.first_name, Students.graduation_semester, Students.graduation_year, Students.major
+      SELECT Matches.match_id, Students.first_name, Students.first_name, Students.graduation_semester, Students.graduation_year, Students.major
       FROM Matches, Students where Matches.student_id1 = ? AND Matches.status = 'Accepted'
       AND Students.user_id = Matches.student_id2");
     $stmt->bindParam(1, $sid);
     $stmt->bindParam(2, $sid);
 
-    $stmt->exec();
+    $stmt->execute();
 
     return $stmt->fetchAll();
   }
@@ -148,14 +148,33 @@
   function pendingMatchSent($sid) {
     global $dbConn;
 
-    $stmt = $dbConn->prepare("SELECT Students.first_name, Students.last_name, Students.graduation_semester, Students.graduation_year, Students.major
+    $stmt = $dbConn->prepare("SELECT Matches.match_id, Students.first_name, Students.last_name, Students.graduation_semester, Students.graduation_year, Students.major
       FROM Matches, Students where Matches.student_id1 = ? AND Matches.status = 'Pending'
       AND Students.user_id = Matches.student_id2");
     $stmt->bindParam(1, $sid);
 
-    $stmt->exec();
+    $stmt->execute();
 
     return $stmt->fetchAll();
+  }
+
+  // Purpose: update the databse upon change the status for user
+  // return True if updated else false;
+
+  function updateMatchStatus($mid, $status)
+  {
+    global $dbConn;
+
+    try {
+      $stmt = $dbConn->prepare("UPDATE Matches SET status=? WHERE match_id=?");
+      $stmt->bindParam(1, $status);
+      $stmt->bindParam(2, $mid);
+      if($stmt->execute()) {
+        return True;
+      }
+    } catch (PDOEXCEPTION $e) {
+      return False;
+    }
   }
 
 
