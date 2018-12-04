@@ -94,6 +94,86 @@
     return True;
   }
 
-  // Return a list of exist matches.
-  // function listMatch()
+  // Purpose: the match invites that sent to current students
+  //          whcich are not currently been accepted or rejected
+  // Return: List of students, with attrbutes:
+  //         (Name, Graduation, Major)
+  //
+
+  function pendingMatchAll($sid) {
+    global $dbConn;
+
+    $stmt = $dbConn->prepare("SELECT Students.first_name, Students.first_name, Students.graduation_semester, Students.graduation_year, Students.major
+      FROM Matches, Students where Matches.student_id2 = ? AND Matches.status = 'Pending'
+      AND Students.user_id = Matches.student_id1");
+    $stmt->bindParam(1, $sid);
+
+    $stmt->exec();
+
+    return $stmt->fetchAll();
+  }
+
+  // Purpose: the match invites that accepted by current students
+  //          or other user accepted
+  //          whcich are not currently been pending or rejected
+  // Return: List of students, with attrbutes:
+  //         (Name, Graduation, Major)
+  //
+
+  function acceptedMatchAll($sid) {
+    global $dbConn;
+
+    $stmt = $dbConn->prepare("
+      SELECT Students.first_name, Students.last_name, Students.graduation_semester, Students.graduation_year, Students.major
+      FROM Matches, Students where Matches.student_id2 = ? AND Matches.status = 'Accepted'
+      AND Students.user_id = Matches.student_id1
+      UNION
+      SELECT Students.first_name, Students.first_name, Students.graduation_semester, Students.graduation_year, Students.major
+      FROM Matches, Students where Matches.student_id1 = ? AND Matches.status = 'Accepted'
+      AND Students.user_id = Matches.student_id2");
+    $stmt->bindParam(1, $sid);
+    $stmt->bindParam(2, $sid);
+
+    $stmt->exec();
+
+    return $stmt->fetchAll();
+  }
+
+  // Purpose: the match invites that sent to current students
+  //          whcich are not currently been accepted or rejected
+  // Return: List of students, with attrbutes:
+  //         (Name, Graduation, Major)
+  //
+
+  function pendingMatchSent($sid) {
+    global $dbConn;
+
+    $stmt = $dbConn->prepare("SELECT Students.first_name, Students.last_name, Students.graduation_semester, Students.graduation_year, Students.major
+      FROM Matches, Students where Matches.student_id1 = ? AND Matches.status = 'Pending'
+      AND Students.user_id = Matches.student_id2");
+    $stmt->bindParam(1, $sid);
+
+    $stmt->exec();
+
+    return $stmt->fetchAll();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  ?>
