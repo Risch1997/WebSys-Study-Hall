@@ -50,6 +50,11 @@ body {
   color: white;
   margin: 8px 0;
 }
+
+.centered {
+  text-align: center;
+}
+
 input[type=text] {
     width: 100%;
     padding: 12px 20px;
@@ -59,13 +64,20 @@ input[type=text] {
     border-radius: 4px;
     box-sizing: border-box;
 }
-input[type=submit] {
+
+.inviteButton {
+    font-size: 12px;
     width: 20%;
-    background-color: #c65353;
+    background-color: #7c2525;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
-    border: none;
+    border: 1px solid black;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.inviteButton:hover {
+    background-color: #d84e4e;
+    color: black;
 }
