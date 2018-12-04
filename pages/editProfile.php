@@ -30,15 +30,11 @@
 		}
 		updateProfile($id,$_POST["fname"],$_POST["lname"],$_POST["major"],$_POST["minor"],$_POST["semester"],$_POST["year"] );
 		updateCourses($id, $selectedCourses);
-		echo "<meta http-equiv='refresh' content='0'>";
-		echo "<script type='text/javascript'>$('#notification').show();</script>";
+		echo "<script type='text/javascript'>alert('Saved Changes');</script>";
 	}
 ?>
 
-		<h1>Study Hall</h1>
-		<div id="notification" class="success">
-		  Profile was successfully updated!
-		</div>
+
 		<div class="center">
 			<form id="profle" method="POST">
 				<h1>Student Information</h1>
@@ -51,7 +47,7 @@
 						<input type="text" name="lname" id="lname" value=<?php echo $last_name;?> />
 
 						<label for="email">Email:</label>
-						<input type="text" name="email" id="email" value=<?php echo $email;?> readonly/>
+						<input readonly type="text" name="email" id="email" value=<?php echo $email;?> />
 
 						<label for="major">Major:</label>
 						<select id="major" name="major">

@@ -1,8 +1,8 @@
 <?php
 	include("../includes/header.php");
-  
+
   if (isset($_SESSION['user_id'])) {
-    header("Location: mymatches.php");
+    header("Location: myMatches.php");
   }
 
 	// Handle new user
@@ -18,7 +18,7 @@
 		// TODO: Ensure all fields are filled out
 		if (createUser($email, $first_name, $last_name, $password, $school)) {
       if (login($email, $password)) {
-        header("Location: mymatches.php");
+        header("Location: myMatches.php");
       }
 		}
 	}
@@ -32,7 +32,7 @@
 
 		// TODO: Ensure all fields are filled out.
 		if (login($email, $password)) {
-			header("Location: mymatches.php");
+			header("Location: myMatches.php");
 		}
 	}
 
@@ -55,11 +55,6 @@
 		// </form>";
 	}
 ?>
-<div id="logo">
-  <a href="">
-    <img src="../studyHallLogo.png" alt="Logo for the Study Hall Site" height="100">
-  </a>
-</div>
 <form class=wrap id="register" method="POST">
 	<input type="email" name="email" placeholder="Email Address" required>
 	<input type="text" name="first_name" placeholder="First Name" required>

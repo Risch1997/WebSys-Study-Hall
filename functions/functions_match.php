@@ -103,7 +103,7 @@
   function pendingMatchAll($sid) {
     global $dbConn;
 
-    $stmt = $dbConn->prepare("SELECT Matches.match_id, Students.first_name, Students.first_name, Students.graduation_semester, Students.graduation_year, Students.major
+    $stmt = $dbConn->prepare("SELECT Matches.student_id1, Matches.match_id, Students.first_name, Students.first_name, Students.graduation_semester, Students.graduation_year, Students.major
       FROM Matches, Students where Matches.student_id2 = ? AND Matches.status = 'Pending'
       AND Students.user_id = Matches.student_id1");
     $stmt->bindParam(1, $sid);
@@ -124,11 +124,11 @@
     global $dbConn;
 
     $stmt = $dbConn->prepare("
-      SELECT Matches.match_id, Students.first_name, Students.last_name, Students.graduation_semester, Students.graduation_year, Students.major
+      SELECT Students.user_id, Matches.match_id, Students.first_name, Students.last_name, Students.graduation_semester, Students.graduation_year, Students.major
       FROM Matches, Students where Matches.student_id2 = ? AND Matches.status = 'Accepted'
       AND Students.user_id = Matches.student_id1
       UNION
-      SELECT Matches.match_id, Students.first_name, Students.first_name, Students.graduation_semester, Students.graduation_year, Students.major
+      SELECT Students.user_id, Matches.match_id, Students.first_name, Students.first_name, Students.graduation_semester, Students.graduation_year, Students.major
       FROM Matches, Students where Matches.student_id1 = ? AND Matches.status = 'Accepted'
       AND Students.user_id = Matches.student_id2");
     $stmt->bindParam(1, $sid);

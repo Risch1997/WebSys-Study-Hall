@@ -1,6 +1,9 @@
 <?php
 
-  // fetch current user's information from the database
+  // Purpose: Fetch current user's information from the database
+  // Return: List of:
+  //         (First Name, Last Name, Email, Graduation, Major, Minor)
+  //
   function getUserProfile($id) {
     global $dbConn, $dbConfig;
 
@@ -17,7 +20,10 @@
     global $dbConn, $dbConfig;
 
     $info = [];
-    $result = $dbConn->query("SELECT `course_id`, `priority` FROM `Sc_relation` WHERE `student_id`='$id';");
+    $result = $dbConn->query("SELECT `subject`, `course_number`, `course_name`,c.`course_id`, `priority`
+      FROM `Sc_relation` AS s,`Courses` AS c
+      WHERE `student_id`='$id' AND c.`course_id`= s.`course_id`
+      ORDER BY `course_name`");
     if ($result->rowCount() > 0) {
 			$info = $result->fetchAll();
     }

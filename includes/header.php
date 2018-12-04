@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="../styles/studyHall.css">
     <link rel="stylesheet" href="../styles/editProfile.css">
     <link rel="stylesheet" href="../styles/browse.css">
-    <script src="../scripts/studyHall.js" type="text/javascript" charset="utf-8" async defer></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <style type="text/css">
       body {
@@ -32,7 +31,7 @@
         <div>
           <ol>
             <li><a href="browse.php">Browse for Matches</a></li>
-            <li><a href="">My Matches</a></li>
+            <li><a href="myMatches.php">My Matches</a></li>
             <li><a href="editProfile.php">My Profile</a></li>
             <li><a href="logout.php">Log Out</a></li>
           </ol>

@@ -1,13 +1,7 @@
 .center {
     margin: auto;
     margin-top: 50px;
-    width: 50%;
-    padding: 10px;
-}
-.center {
-    margin: auto;
-    margin-top: 50px;
-    width: 50%;
+    width: 100%;
     padding: 10px;
 }
 * {
@@ -20,16 +14,10 @@ body {
 /* Float four columns side by side */
 .column {
   float: left;
-  width: 50%;
+  width: 40%;
   padding: 10 10px;
   height: 50%;
   border: 3px solid #c65353;
-}
-
-.card-container {
-  text-align: center;
-  overflow-x: hidden;
-  height: 80%;
 }
 
 /* Remove extra left and right margins, due to padding */
@@ -52,22 +40,30 @@ body {
 }
 
 /* Style the counter cards */
-.card {
+/* .card {
     margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 40%;
+} */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  text-align: center;
+  background-color: #c65353;
+  color: white;
+  margin: 8px 0;
+  width: 90%;
+  float: left;
+  margin: 20px;
+  height: 400px;
 }
 img {
   margin-top: 20px;
   border-radius: 50%;
 }
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
 .container {
     padding: 10px;
     text-align: center;
@@ -75,6 +71,56 @@ img {
     color: white;
     padding: 2px 16px;
 }
+.card-container {
+  text-align: center;
+  overflow-x: hidden;
+  height: 80%;
+}
 #invitations {
   border-right: none;
+}
+.inviteButton {
+    font-size: 12px;
+    width: 20%;
+    background-color: #7c2525;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.removeButton {
+    font-size: 12px;
+    width: 20%;
+    background-color: #7c2525;
+    color: white;
+    padding: 14px 10px 14px 10px;
+    margin: 8px 0;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.removeButton:hover {
+    background-color: #d84e4e;
+    color: black;
+}
+.inviteButton:hover {
+    background-color: #d84e4e;
+    color: black;
+}
+.btn-group button {
+    background-color: #4CAF50; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
 }
